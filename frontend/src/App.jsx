@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import './App.css'
 import Goal from '../components/Goal.jsx'
 
 const URL = 'http://localhost:8000'
@@ -66,18 +65,23 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Goals</h1>
-      {goalsElements}
-      <div onClick = {() => setPopup(true)}>+</div>
+      <h1>Goal Tracker</h1>
+      <h4>Your Goals</h4>
+      {goalsElements.length > 0 ? goalsElements : <p>You currently have no goals.</p>}
+
+      <div className = 'addPopup' onClick = {() => setPopup(true)}>+</div>
 
 
-      {popup && (<div>
-        <div onClick={() => setPopup(false)}>x</div>
-        <h3>Add Goal</h3>
-        <form onSubmit={addGoal}>
-          <input type="text" name = "goal" value = {form} onChange = {handleChange}/>
-          <button>Add</button>
-        </form>
+      {popup && (<div className='popup'>
+        <div className="closePopup" onClick={() => setPopup(false)}>X</div>
+        <div className="content">
+          <h3>Add Goal</h3>
+          <form onSubmit={addGoal}>
+            <input className="add-goal-input" type="text" name = "goal" value = {form} onChange = {handleChange}/>
+            <button className="button">Add</button>
+          </form>
+        </div>
+        
       </div>)}
 
     </div>
